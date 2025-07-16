@@ -7,3 +7,6 @@ print("My name is : ",FullName)
 print("Date of Birth : ",DOB)
 print("Address : ",Address)
 print("Mobile : ",Mobile)
+
+print(type(FullName))
+print(type(Mobile))
