@@ -9,4 +9,4 @@ y = 12
 
 z = int(x) + y
 print(z)
-print(type)
+print(type(z))
