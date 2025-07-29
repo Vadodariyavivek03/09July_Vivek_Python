@@ -5,7 +5,6 @@ b = int(input("Enter the mark b : "))
 c = int(input("Enter the mark c : "))
 d = int(input("Enter the mark d : "))
 
-
 if a >= 40 and b >= 40 and c >= 40 and d >= 40:
       
     avg = a + b + c + d
