@@ -18,16 +18,16 @@ print(mystr.replace("python", "Java"))  # Replace "python" with "Java"
 
 print(mystr.split())  
 
-print(mystr.capitalize()) # Capitalize the first letter of the string
+print(mystr.capitalize()) # capital the first letter of the string
 
-print(mystr.title())      # Capitalize the first letter of each word
+print(mystr.title())      # capital the first letter of each word
 
-print(mystr.casefold())   # Convert the string to lowercase for case-insensitive comparisons.
+print(mystr.casefold())   # convert the string to lowercase for case-insensitive comparisons.
 
-print(mystr.startswith("Hello"))  # Check if the string starts with "Hello" and return boolean value.
+print(mystr.startswith("Hello"))  # check if the string starts with "Hello" and return boolean value.
 
-print(mystr.endswith("Python"))   # Check if the string ends with "Python" and return boolean value.
+print(mystr.endswith("Python"))   # check if the string ends with "Python" and return boolean value.
 
-print(mystr.find("python"))       # Find the first occurrence of "python" and return its index, or -1 if not found.
+print(mystr.find("python"))       # find the first occurrence of "python" and return its index, or -1 if not found.
 
 print(mystr.index("object"))
