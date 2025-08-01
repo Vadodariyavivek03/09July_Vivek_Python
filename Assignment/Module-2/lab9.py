@@ -9,3 +9,4 @@ for i in range(n):
     fruits.append(x)
     
 print(fruits)
+
