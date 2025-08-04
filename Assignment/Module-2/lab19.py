@@ -1,4 +1,4 @@
-# Write a Python program to create a dictionary with 6 key-value pairs.
+# Write a Python program to update a value in a dictionary.
 
 my_data = {
             "id" : 101,
@@ -10,11 +10,7 @@ my_data = {
             "country" : "India"
           }
 
+my_data["name"] = "Meet"
+my_data["age"] = 18
+
 print(my_data)
-
-print(type(my_data))
-
-# ----------------------------------------- #
-
-for i in my_data:
-    print(i)
