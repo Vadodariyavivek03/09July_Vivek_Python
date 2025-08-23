@@ -80,7 +80,7 @@ def view_posts():
         print("\nNo Posts Available Yet...!! \n")
         return
     
-    print("\n -------- All Posts -------- ")
+    print("\n-------- All Posts -------- ")
 
     for i, post in enumerate(posts, start=1):
         print(f"\n--- Post : {i} ---\n")
@@ -121,7 +121,7 @@ def user_menu(user):
         elif choice == "3":
             search_posts()
         elif choice == "4":
-            print(f"Logged out {user}.")
+            print(f"\nLogged out {user}.")
             break
         else:
             print("\nError: Invalid Choice... Try again later...!!")
