@@ -1,4 +1,5 @@
 # Write a Python program to handle exceptions in a simple calculator (division by zero, invalid input).
+
 try:
     sign = input("Enter a sign (+, -, *, /): ")
 
