@@ -1,6 +1,6 @@
 # Write Python programs to demonstrate method overloading and method overriding.
 
-# Method OverLoading
+# Method Overloading
 
 class Book:
 
