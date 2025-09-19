@@ -13,7 +13,7 @@ class Stud_Data:
     def get_data(self, sub):
         print("Subject ::",sub)
 
-obj = Stu_Data()
+obj = Stud_Data()
 
 # obj.get_data(101)
 # obj.get_data("Vivek", 21, "Rajkot")
