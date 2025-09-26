@@ -2,9 +2,52 @@ import os
 import tkinter as tk
 from tkinter import messagebox
 
-os.chdir("Module-3")
-FOLDER = "Posts"
-os.makedirs(FOLDER, exist_ok=True)
+# class
+
+class User:
+    def __init__(self, name):
+        self.name = name
+
+# ------------------------------------------------------------------------------------------- #
+
+class Post:
+    
+    os.chdir("Module-3")        # create folder to save posts
+    FOLDER = "Posts"
+    os.makedirs(FOLDER, exist_ok=True)
+
+    def __init__(self, author, title, content):
+        self.author = author
+        self.title = title
+        self.content = content
+
+    def get_filename(self):
+        return f"{self.author.name}_{self.title}.txt".replace(" ", "_")
+    
+    def save(self):
+        path = os.path.join(Post.FOLDER, self.get_filename())
+        f = open(path, "w", encoding="utf-8")
+        f.write(f"Author :: {self.author.name}\nTitle :: {self.title}\n\nContent :: {self.content}")
+
+    def delete(filename):
+        path = os.path.join(Post.FOLDER, filename)
+        if os.path.exists(path):
+            os.remove(path)
+            return True
+        return False
+    
+    def load(filename):
+        path = os.path.join(Post.FOLDER, filename)
+        if os.path.exists(path):
+            f = open(path, "r", encoding="utf-8")
+            content = f.read()
+            return content  
+        return ""
+    
+    def list_posts():
+        return [fn for fn in os.listdir(Post.FOLDER) if fn.endswith(".txt")]
+
+# ------------------------------------------------------------------------------------------- #
 
 def save_post():                      
     name = name_entry.get().strip()
@@ -15,26 +58,23 @@ def save_post():
         messagebox.showwarning("Error!!", "All fields are required!")
         return
 
-    filename = f"{name}_{title}.txt".replace(" ", "_")
-    path = os.path.join(FOLDER, filename)
-
-    f = open(path, "w", encoding="utf-8")
-    f.write(f"Author :: {name}\nTitle :: {title}\n\nContent :: {content}")
+    user = User(name)
+    post = Post(user, title, content)
+    post.save()
 
     refresh_posts()
     clear_form()
 
-    messagebox.showinfo("Saved Post Successfully!!", f"Post saved as {filename}")
+    messagebox.showinfo("Saved Post Successfully!!", f"Post saved as {post.get_filename()}")
 
 # ------------------------------------------------------------------------------------------- #
 
 def refresh_posts():
     posts_list.delete(0, tk.END)
 
-    for fn in os.listdir(FOLDER):
-        if fn.endswith(".txt"):
-            posts_list.insert(tk.END, fn)
-            
+    for fn in Post.list_posts():
+        posts_list.insert(tk.END, fn)
+
 # ------------------------------------------------------------------------------------------- #
 
 def view_post():
@@ -45,11 +85,7 @@ def view_post():
         return
 
     filename = posts_list.get(index)
-    path = os.path.join(FOLDER, filename)
-
-    x = open(path, "r", encoding="utf-8")
-    content = x.read()
-    x.close()
+    content = Post.load(filename)
 
     view.delete("1.0", tk.END)
     view.insert("1.0", content)
@@ -65,17 +101,16 @@ def delete_post():
         return
 
     filename = posts_list.get(index)
-    path = os.path.join(FOLDER, filename)
-
-    if not os.path.exists(path):
+   
+    if not os.path.exists(os.path.join(Post.FOLDER, filename)):
         messagebox.showerror("Error!!", f"File '{filename}' not found...!!")
         return
 
     if messagebox.askyesno("Confirm Delete!!", f"Are you sure you want to delete '{filename}'?"):
-        os.remove(path)
+        Post.delete(filename)
         refresh_posts()
         view.delete("1.0", tk.END)
-        messagebox.showinfo("Deleted!!", f"File '{filename}' has been deleted.")
+        messagebox.showinfo("Deleted!!", f"File '{filename}' has been deleted successfully..")
 
 
 # ------------------------------------------------------------------------------------------- #
@@ -86,6 +121,8 @@ def clear_form():
     content_text.delete("1.0", tk.END)
 
 # ------------------------------------------------------------------------------------------- #
+
+# GUI Application
 
 my_app = tk.Tk()
 my_app.title("Mini_Blog")
@@ -112,7 +149,7 @@ title_entry = tk.Entry(my_app, font=("Arial", 11));
 title_entry.grid(row=2, column=1, sticky="ew", padx=8, pady=5)
 
 tk.Label(my_app, text="Content :::", font=("Arial", 11, "bold"), 
-         bg="#f0f4f8").grid(row=3, column=0, sticky="new", padx=8, pady=5)
+         bg="#f0f4f8").grid(row=3, column=0, sticky="nsew", padx=8, pady=5)
 
 content_text = tk.Text(my_app, height=6, wrap="word", font=("Arial", 11))
 content_text.grid(row=3, column=1, sticky="ew", padx=8, pady=5)
@@ -125,7 +162,7 @@ btn_frame.grid(row=4, column=1, pady=10, sticky="n")
 tk.Button(btn_frame, text="Save", width=12, bg="#4CAF50", fg="white",
           font=("Arial", 11, "bold"), command=save_post).pack(side="left", padx=12)
 
-tk.Button(btn_frame, text="Clear", width=12, bg="#f44336", fg="white",
+tk.Button(btn_frame, text="Clear", width=12, bg="#c07ca1", fg="white",
           font=("Arial", 11, "bold"), command=clear_form).pack(side="left", padx=12)
           
 

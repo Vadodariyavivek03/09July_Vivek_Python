@@ -1,4 +1,0 @@
-Author :: Vivek
-Title :: Journey
-
-Content :: abcdefghijklmnopqrstuvwxyz1234567890
