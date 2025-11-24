@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Patient Registration</title>
+    <script src="/static/js/form_validation.js"></script>
+</head>
+
+<body>
+    <h1>Patient Registration Form</h1>
+    <form id="patientForm" method="POST" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+
+
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age"><br>
+
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+
+
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone"><br><br>
+
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+
+</html>

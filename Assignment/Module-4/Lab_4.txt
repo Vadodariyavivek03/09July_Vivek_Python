@@ -1,0 +1,51 @@
+Step 1: Create the project
+django-admin startproject mysite
+cd mysite
+
+Step 2: Create an app
+python manage.py startapp home
+
+Project Structure:
+mysite/
+manage.py
+mysite/
+settings.py
+urls.py
+home/
+views.py
+urls.py
+templates/
+home.html
+
+Step 3: Add the app to settings (mysite/settings.py)
+INSTALLED_APPS = [
+'home',
+]
+
+Step 4: Create a view (home/views.py)
+from django.shortcuts import render
+
+def homepage(request):
+    return render(request, "home.html")
+
+
+Step 5: Configure URLs (mysite/urls.py)
+from django.contrib import admin
+from django.urls import path
+from home.views import homepage
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', homepage),
+]
+
+
+Step 6: Create template (home/templates/home.html)
+<html>
+<body>
+<h1>Hello, welcome to my Django page</h1>
+</body>
+</html>
+
+Step 7: Run the server
+python manage.py runserver
