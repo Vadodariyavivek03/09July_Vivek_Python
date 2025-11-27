@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Finder - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f4f6fb;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(120deg, #0163e0, #2196f3);
+            padding: 15px 50px;
+            color: #fff;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo .icon {
+            background: #fff;
+            color: #2196f3;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand .main {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .brand .sub {
+            font-size: 11px;
+            color: #ffeb99;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0%;
+            height: 2px;
+            background: #ffb74d;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .welcome {
+            font-size: 14px;
+            color: #ffeb99;
+        }
+
+        .login-btn,
+        .logout-btn {
+            text-decoration: none;
+            background: #ff9800;
+            color: #fff;
+            padding: 7px 16px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover,
+        .logout-btn:hover {
+            background: #ffb74d;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1580281657747-29b4f04c1b27?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero a {
+            background: #ff9800;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .hero a:hover {
+            background: #ffb74d;
+        }
+
+        .services {
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #0163e0;
+        }
+
+        .service-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #fff;
+            width: 280px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card i {
+            font-size: 32px;
+            color: #2a5298;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #0163e0;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <div class="icon"><i class="fa fa-user-doctor"></i></div>
+                <div class="brand">
+                    <span class="main">Doctor Finder</span>
+                    <span class="sub">Your health, our priority</span>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="/home" class="nav-item active">Home</a>
+                <a href="/doctors" class="nav-item">Doctors</a>
+                <a href="/contact" class="nav-item">Contact</a>
+            </nav>
+
+            <div class="user-section">
+                <span class="welcome">Hello, <b>{{ user }}</b></span>
+                {% if user is none %}
+                <a href="/" class="login-btn">Login</a>
+                {% else %}
+                <a href="/userlogout" class="logout-btn">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Find the Best Doctors Near You</h1>
+        <p>Search by specialty, location, rating and more</p>
+        <a href="/register">Register Now</a>
+    </section>
+
+    <section class="services">
+        <h2>Available Specialties</h2>
+        <div class="service-cards">
+            <div class="card">
+                <i class="fa fa-heart-pulse"></i>
+                <h3>Cardiologist</h3>
+                <p>Specialized heart care and cardiovascular treatment</p>
+            </div>
+            <div class="card">
+                <i class="fa fa-brain"></i>
+                <h3>Neurologist</h3>
+                <p>Diagnosis and treatment of brain and nerve disorders</p>
+            </div>
+            <div class="card">
+                <i class="fa fa-child"></i>
+                <h3>Pediatrician</h3>
+                <p>Child and infant health specialists</p>
+            </div>
+            <div class="card">
+                <i class="fa fa-tooth"></i>
+                <h3>Dentist</h3>
+                <p>Oral care and dental treatments</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 Doctor Finder | All Rights Reserved
+    </footer>
+</body>
+
+</html>

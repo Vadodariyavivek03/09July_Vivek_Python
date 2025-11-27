@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <script>
+        function validateForm() {
+            let email = document.forms["regForm"]["email"].value;
+            let phone = document.forms["regForm"]["phone"].value;
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const phonePattern = /^[0-9]{10}$/;
+
+            if (!emailPattern.test(email)) {
+                alert("Enter a valid email address.");
+                return false;
+            }
+
+            if (!phonePattern.test(phone)) {
+                alert("Phone number must be 10 digits.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Registration Form</h2>
+    <form name="regForm" onsubmit="return validateForm()">
+        <label>Email</label>
+        <input type="text" name="email"><br><br>
+
+        <label>Phone</label>
+        <input type="text" name="phone"><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+
+</html>
