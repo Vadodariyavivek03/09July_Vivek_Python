@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8 6h8M8 10h8M8 14h5M5 4h14v16H5zM9 2v4M15 2v4" />
+                </svg>
+                <h1 class="text-2xl font-bold text-blue-600">NotesApp</h1>
+            </div>
+
+            <div class="flex gap-3">
+                <a href="/"
+                    class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition">
+                    Back to Dashboard
+                </a>
+
+                <a href="/userlogout" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Page -->
+    <div class="flex justify-center pt-32 px-4">
+
+        <div class="bg-white shadow-xl rounded-2xl w-full max-w-2xl p-8">
+
+            <h1 class="flex justify-center">Profile</h1>
+
+            <!-- Profile Picture -->
+            <div class="flex flex-col items-center">
+                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-600">
+                    <img id="profilePreview" src="https://via.placeholder.com/150" class="w-full h-full object-cover" />
+                </div>
+
+                <div class="flex gap-4 mt-3">
+
+                    <!-- ADD BUTTON WITH ICON -->
+                    <label
+                        class="cursor-pointer bg-blue-600 text-white px-5 py-1 rounded-lg text-sm flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+             
+                        <input type="file" id="profileImage" hidden accept="image/*" onchange="previewImage(event)">
+                    </label>
+
+                    <!-- REMOVE BUTTON WITH ICON -->
+                    <button onclick="removeImage()"
+                        class="bg-red-600 text-white px-5 py-1 rounded-lg text-sm flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+              
+                    </button>
+
+                </div>
+
+            </div>
+
+            <form method="post" class="mt-6">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-1">Full Name</label>
+                    <input type="text" name="fullname" value="{{user.fullname}}" class="w-full border px-4 py-2 rounded-lg"
+                        placeholder="Enter full name">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-1">Email</label>
+                    <input type="email" name="email" value="{{user.email}}" class="w-full border px-4 py-2 rounded-lg"
+                        placeholder="Enter email">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-1">Mobile</label>
+                    <input type="number" name="mobile" value="{{user.mobile}}" class="w-full border px-4 py-2 rounded-lg"
+                        placeholder="Enter mobile number">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-1">Password</label>
+                    <input type="password" name="password" value="{{user.password}}" class="w-full border px-4 py-2 rounded-lg" placeholder="Enter password">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-4 mt-10">
+
+        <p class="text-sm">
+            © 2025 NotesApp. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById("profilePreview").src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function removeImage() {
+            document.getElementById("profilePreview").src = "https://via.placeholder.com/150";
+        }
+    </script>
+
+</body>
+
+</html>
