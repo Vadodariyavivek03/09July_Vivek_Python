@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Edu_Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Card -->
+    <div
+        class="bg-white w-full max-w-md shadow-xl rounded-2xl p-8 border-t-4 border-[#1F3B73] max-h-[90vh] overflow-y-auto">
+
+        <!-- Logo -->
+        <div class="flex flex-col items-center mt-4">
+            <img src="/static/logo.png" class="w-20 h-20 mb-2" alt="Edu_Tech Logo">
+            <h2 class="text-2xl font-bold text-[#1f3b75]">Registration</h2>
+        </div>
+
+        <!-- Form -->
+        <form class="mt-8 space-y-5 pb-8" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Role -->
+            <input type="hidden" name="role" value="Student">
+
+            <!-- Rounded Profile Picture -->
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 rounded-full bg-gray-200 border border-gray-300 flex items-center justify-center overflow-hidden">
+                    <img id="previewImg" src="" class="w-full h-full object-cover hidden" />
+                    <span id="placeholder" class="text-gray-500 text-sm">No Image</span>
+                </div>
+
+                <!-- Upload Button -->
+                <label class="cursor-pointer bg-[#1f3b75] text-white py-1 px-4 rounded-lg text-sm mt-3">
+                    Upload Photo
+                    <input type="file" name="profile_pic" accept="image/*" class="hidden" onchange="loadImage(event)" />
+                </label>
+            </div>
+
+            <!-- Form Fields -->
+            <div>
+                <label class="text-sm font-medium">Full Name</label>
+                <input type="text" name="full_name" placeholder="Enter your full name"
+                    class="w-full rounded-md p-3 mt-1 border focus:outline-none focus:ring-2 focus:ring-[#1F3B73]"
+                    required />
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Email</label>
+                <input type="email" name="email" placeholder="Enter your email"
+                    class="w-full rounded-md p-3 mt-1 border focus:outline-none focus:ring-2 focus:ring-[#1F3B73]"
+                    required />
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Password</label>
+                <input type="password" name="password" placeholder="Enter your password"
+                    class="w-full rounded-md p-3 mt-1 border focus:outline-none focus:ring-2 focus:ring-[#1F3B73]"
+                    required />
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Mobile</label>
+                <input type="text" name="mobile" placeholder="Enter your mobile"
+                    class="w-full rounded-md p-3 mt-1 border focus:outline-none focus:ring-2 focus:ring-[#1F3B73]"
+                    required />
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">City</label>
+                <input type="text" name="city" placeholder="Enter your city"
+                    class="w-full rounded-md p-3 mt-1 border focus:outline-none focus:ring-2 focus:ring-[#1F3B73]"
+                    required />
+            </div>
+
+            <!-- Register Button -->
+            <button type="submit" class="w-full bg-[#1f3b75] text-white py-3 rounded-lg mt-4">
+                Register
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+        function loadImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const img = document.getElementById("previewImg");
+            const placeholder = document.getElementById("placeholder");
+
+            img.src = URL.createObjectURL(file);
+            img.classList.remove("hidden");
+            placeholder.classList.add("hidden");
+        }
+    </script>
+
+</body>
+
+</html>

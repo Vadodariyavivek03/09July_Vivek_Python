@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard | Edu_Tech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- HEADER -->
+    <header class="bg-[#E8F1FF] shadow px-10 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <img src="/static/logo.png" class="h-10">
+            <h1 class="text-2xl font-bold text-[#1F3B73]">Edu_Tech | Faculty Panel</h1>
+        </div>
+
+        <a href="/logout/" class="text-red-600 font-medium">Logout</a>
+    </header>
+
+    <!-- MAIN -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- TITLE -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-[#1F3B73]">Registered Students</h2>
+            <p class="text-gray-600 mt-1">
+                Review student registrations and manage approval requests.
+            </p>
+        </div>
+
+        <!-- STUDENT TABLE -->
+        <div class="bg-white rounded-3xl shadow overflow-hidden">
+
+            <!-- Blue strip -->
+            <div class="bg-[#E8F1FF] px-6 py-4">
+                <h3 class="text-xl font-semibold text-[#1F3B73]">
+                    Student List
+                </h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-4">Name</th>
+                            <th class="px-6 py-4">Email</th>
+                            <th class="px-6 py-4">Course</th>
+                            <th class="px-6 py-4 text-center">Status</th>
+                            <th class="px-6 py-4 text-center">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y">
+                        <!-- Example Row -->
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Rahul Sharma</td>
+                            <td class="px-6 py-4 text-gray-600">rahul@gmail.com</td>
+                            <td class="px-6 py-4">Python</td>
+
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-700">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td class="px-6 py-4 text-center flex justify-center gap-3">
+                                <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                                    Approve
+                                </button>
+                                <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                                    Reject
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Approved Example -->
+                        <tr>
+                            <td class="px-6 py-4 font-medium">Anjali Patel</td>
+                            <td class="px-6 py-4 text-gray-600">anjali@gmail.com</td>
+                            <td class="px-6 py-4">Web Development</td>
+
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 rounded-full text-sm bg-green-100 text-green-700">
+                                    Approved
+                                </span>
+                            </td>
+
+                            <td class="px-6 py-4 text-center text-gray-400">
+                                —
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#E8F1FF] text-center py-6 mt-12 text-[#1F3B73] font-medium">
+        © 2025 Edu_Tech. Faculty Dashboard
+    </footer>
+
+</body>
+
+</html>

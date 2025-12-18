@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white shadow-lg rounded-xl w-full max-w-md p-8">
+
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-700">
+            Create Student Account
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Profile Image Section -->
+            <label class="block mb-2 text-gray-600">Profile Picture</label>
+
+            <!-- Preview Image -->
+            <div class="flex items-center justify-center mb-4">
+                <img id="previewImg" src="/static/user/default-profile.png"
+                    class="h-24 w-24 rounded-full object-cover border shadow" />
+            </div>
+
+            <!-- Upload Button -->
+            <label
+                class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-full text-sm block w-fit mx-auto mb-6">
+                Choose Image
+                <input type="file" name="profile_pic" id="profilePic" accept="image/*" hidden required
+                    onchange="previewImage(event)">
+            </label>
+
+            <!-- Full Name -->
+            <label class="block mb-2 text-gray-600">Full Name</label>
+            <input type="text" name="full_name" required class="w-full px-4 py-2 border rounded-lg mb-4"
+                placeholder="Enter full name" />
+
+            <!-- Email -->
+            <label class="block mb-2 text-gray-600">Email</label>
+            <input type="email" name="email" required class="w-full px-4 py-2 border rounded-lg mb-4"
+                placeholder="Enter email" />
+
+            <!-- Username -->
+            <label class="block mb-2 text-gray-600">Username</label>
+            <input type="text" name="username" required class="w-full px-4 py-2 border rounded-lg mb-4"
+                placeholder="Choose a username" />
+
+            <!-- Password -->
+            <label class="block mb-2 text-gray-600">Password</label>
+            <input type="password" name="password" required class="w-full px-4 py-2 border rounded-lg mb-6"
+                placeholder="Choose a password" />
+
+            <!-- Mobile Number -->
+            <label class="block mt-4 mb-2 text-gray-700">Mobile Number</label>
+            <input type="number" name="mobile" required
+                class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300" minlength="10"
+                maxlength="10">
+
+            <!-- Submit -->
+            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+                Register
+            </button>
+
+            {% if error %}
+            <p class="text-red-600 text-center mt-4">{{ error }}</p>
+            {% endif %}
+        </form>
+
+        <p class="text-center text-sm text-gray-500 mt-6">
+            Already have an account?
+            <a href="/" class="text-blue-600">Login</a>
+        </p>
+
+    </div>
+
+    <!-- JavaScript Preview -->
+    <script>
+        function previewImage(event) {
+            const output = document.getElementById('previewImg');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = () => URL.revokeObjectURL(output.src);
+        }
+    </script>
+
+</body>
+
+</html>

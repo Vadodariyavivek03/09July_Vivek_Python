@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Progress | Edu_Tech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- NAVBAR -->
+    <nav class="w-full bg-[#E8F1FF] shadow px-10 py-4 flex items-center justify-between sticky top-0 z-50">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+            <div class="bg-white shadow p-1 rounded-xl">
+                <img src="/static/logo.png" alt="Edu_Tech Logo" class="h-12 w-12 object-contain">
+            </div>
+            <span class="text-2xl font-bold text-[#1F3B73] tracking-wide">Edu_Tech</span>
+        </div>
+
+        <!-- Links -->
+        <ul class="hidden md:flex items-center space-x-6 text-[#1F3B73] font-medium">
+            <li><a href="/dashboard/" class="nav-link hover:text-blue-800">Home</a></li>
+            <li><a href="/about/" class="nav-link hover:text-blue-800">About</a></li>
+            <li><a href="/tasks/" class="nav-link hover:text-blue-800">Tasks</a></li>
+            <li><a href="/courses/" class="nav-link hover:text-blue-800">Courses</a></li>
+            <li><a href="/contact_us/" class="nav-link hover:text-blue-800">Contact Us</a></li>
+        </ul>
+
+        <!-- Right: User Dropdown -->
+        <div class="relative group">
+
+            <button class="bg-white px-5 py-2 rounded-lg text-gray-700 font-medium flex items-center space-x-2 shadow">
+                <span>{{ request.session.user }}</span>
+                <span class="text-gray-500">▾</span>
+            </button>
+
+            <!-- Dropdown -->
+            <div class="absolute right-0 mt-2 -translate-y-1 
+               w-40 bg-white shadow-lg rounded-lg 
+               opacity-0 invisible
+               group-hover:opacity-100 group-hover:visible
+               transition-all duration-200 z-50">
+
+                <a href="/dashboard/" class="block px-4 py-2 hover:bg-gray-100">
+                    Back to Home
+                </a>
+
+                <a href="/logout/" class="block px-4 py-2 hover:bg-gray-100 text-red-600">
+                    Log-out
+                </a>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- MAIN -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- PAGE HEADER -->
+        <div class="mb-10">
+            <h1 class="text-3xl font-bold text-[#1F3B73] mb-2">
+                Learning Progress
+            </h1>
+            <p class="text-gray-600">
+                Track your performance, consistency, and improvement over time.
+            </p>
+        </div>
+
+        <!-- SUMMARY CARDS -->
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+
+            <div class="bg-white rounded-2xl shadow p-6 border-t-4 border-blue-600">
+                <h3 class="text-sm text-gray-500">Courses Enrolled</h3>
+                <p class="text-3xl font-bold text-[#1F3B73] mt-2">3</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow p-6 border-t-4 border-green-600">
+                <h3 class="text-sm text-gray-500">Tasks Completed</h3>
+                <p class="text-3xl font-bold text-[#1F3B73] mt-2">18</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow p-6 border-t-4 border-yellow-500">
+                <h3 class="text-sm text-gray-500">Pending Tasks</h3>
+                <p class="text-3xl font-bold text-[#1F3B73] mt-2">4</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow p-6 border-t-4 border-purple-600">
+                <h3 class="text-sm text-gray-500">Overall Score</h3>
+                <p class="text-3xl font-bold text-[#1F3B73] mt-2">82%</p>
+            </div>
+
+        </div>
+
+        <!-- ACTIVITY GRAPH -->
+        <div class="bg-white rounded-3xl shadow p-8 mb-12">
+            <h2 class="text-xl font-semibold text-[#1F3B73] mb-6">
+                Weekly Learning Activity
+            </h2>
+
+            <div class="flex items-end gap-6 h-48">
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 40%"></div>
+                    <span class="text-sm mt-2">Mon</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 60%"></div>
+                    <span class="text-sm mt-2">Tue</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 80%"></div>
+                    <span class="text-sm mt-2">Wed</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 50%"></div>
+                    <span class="text-sm mt-2">Thu</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 90%"></div>
+                    <span class="text-sm mt-2">Fri</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 30%"></div>
+                    <span class="text-sm mt-2">Sat</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 bg-blue-500 rounded-t-lg" style="height: 20%"></div>
+                    <span class="text-sm mt-2">Sun</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYSIS + GRADE -->
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- PROGRESS ANALYSIS -->
+            <div class="md:col-span-2 bg-white rounded-3xl shadow p-8">
+                <h2 class="text-xl font-semibold text-[#1F3B73] mb-4">
+                    Performance Analysis
+                </h2>
+
+                <p class="text-gray-600 mb-6">
+                    Your learning consistency has improved significantly over the past weeks.
+                    Task completion rate is high, and conceptual understanding is strong.
+                </p>
+
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Course Completion</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width:85%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Task Accuracy</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width:78%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Consistency</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-purple-600 h-2 rounded-full" style="width:90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRADE CARD -->
+            <div class="bg-white rounded-3xl shadow p-8 text-center border-t-4 border-blue-600">
+                <h2 class="text-xl font-semibold text-[#1F3B73] mb-4">
+                    Overall Grade
+                </h2>
+
+                <div class="text-6xl font-bold text-blue-600 mb-2">
+                    A
+                </div>
+
+                <p class="text-gray-600 text-sm">
+                    Excellent performance. Keep maintaining consistency and challenge yourself
+                    with advanced tasks to reach the next level.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#E8F1FF] text-center py-6 mt-16 text-[#1F3B73]">
+        © 2025 Edu_Tech. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroSphere - Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#e8f8e3]">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#d6f5c9] shadow-md border-b border-green-300 fixed w-full top-0 left-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+
+            <div class="flex items-center gap-2">
+                <img src="/static/images/logo.png" class="h-10 w-10" alt="Logo">
+                <h1 class="text-xl font-semibold text-green-700">AgroSphere</h1>
+            </div>
+
+            <ul class="hidden md:flex gap-6 text-gray-700 font-medium">
+                <li><a href="/" class="hover:text-green-600">Home</a></li>
+                <li><a href="/products" class="hover:text-green-600">Products</a></li>
+                <li><a href="/guides" class="hover:text-green-600">Guides</a></li>
+                <li><a href="/experts" class="hover:text-green-600">Experts</a></li>
+            </ul>
+
+            <div class="hidden md:flex items-center gap-4">
+                {% if user %}
+                <div class="relative">
+                    <button id="userBtn"
+                        class="px-4 py-2 bg-green-200 text-green-800 rounded-lg hover:bg-green-300 transition flex items-center gap-2">
+                        {{ user }} <span>▼</span>
+                    </button>
+
+                    <div id="userMenu"
+                        class="absolute right-0 mt-2 w-40 bg-[#d6f5c9] shadow-lg rounded-lg hidden border border-green-300 text-center">
+                        <a href="/profile" class="block px-4 py-2 hover:bg-green-50 rounded-t-lg">👨‍🌾 Profile</a>
+                        <a href="/settings" class="block px-4 py-2 hover:bg-green-50">⚙️ Settings</a>
+                        <a href="/userlogout" class="block px-4 py-2 hover:bg-green-50 text-red-600 rounded-b-lg">🔓
+                            Logout</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <button id="menuBtn" class="md:hidden text-3xl text-green-700">☰</button>
+        </div>
+    </nav>
+
+    <script>
+        const userBtn = document.getElementById("userBtn");
+        const userMenu = document.getElementById("userMenu");
+        userBtn?.addEventListener("click", () => userMenu.classList.toggle("hidden"));
+        document.addEventListener("click", (e) => {
+            if (!userBtn?.contains(e.target) && !userMenu?.contains(e.target)) {
+                userMenu?.classList.add("hidden");
+            }
+        });
+    </script>
+
+    {% if messages %}
+    {% for message in messages %}
+    <p class="text-green-600 font-semibold text-center animate-pulse">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+
+
+    <!-- PROFILE CARD -->
+    <div class="max-w-3xl mx-auto mt-32 bg-white border border-green-300 shadow-lg rounded-2xl p-10">
+
+        <h2 class="text-3xl font-semibold text-green-700 mb-6 text-center">Your Profile</h2>
+
+        <!-- IMAGE SECTION -->
+        <!-- IMAGE SECTION -->
+        <div class="flex flex-col items-center mb-8">
+
+            {% if profile.profile_image %}
+            <img id="profilePreview" src="{{ profile.profile_image.url }}"
+                class="w-32 h-32 rounded-full object-cover shadow-md border border-green-300">
+            {% else %}
+            <img id="profilePreview" src="/static/images/user_default.png"
+                class="w-32 h-32 rounded-full object-cover shadow-md border border-green-300">
+            {% endif %}
+
+            <!-- BUTTONS -->
+            <div class="flex gap-3 mt-3 justify-center">
+
+                <!-- Camera Button -->
+                <label for="profileImageInput"
+                    class="w-9 h-9 bg-green-600 text-white rounded-full cursor-pointer hover:bg-green-700 flex items-center justify-center text-lg transition"
+                    title="Change Photo">
+                    📷
+                </label>
+
+                <input id="profileImageInput" type="file" name="profile_image" class="hidden"
+                    onchange="previewImage(event)">
+
+                <!-- Remove Button -->
+                <button id="removeButton" type="button"
+                    class="w-9 h-9 bg-red-600 text-white rounded-full cursor-pointer hover:bg-red-700 flex items-center justify-center text-lg transition"
+                    title="Remove Photo" onclick="deletePhoto()">
+                    ✖
+                </button>
+
+            </div>
+
+
+
+        </div>
+
+
+        <!-- FORM -->
+        <form method="POST" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" name="full_name"
+                    class="w-full px-4 py-2 border border-green-300 rounded-lg focus:border-green-600 outline-none"
+                    value="{{ profile.full_name }}" placeholder="Enter your full name" required />
+            </div>
+
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Phone Number</label>
+                <input type="number" name="phone"
+                    class="w-full px-4 py-2 border border-green-300 rounded-lg focus:border-green-600 outline-none"
+                    value="{{ profile.phone }}" placeholder="Enter your mobile number" required />
+            </div>
+
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Address</label>
+                <textarea name="address"
+                    class="w-full px-4 py-2 border border-green-300 rounded-lg focus:border-green-600 outline-none"
+                    placeholder="Enter your address" required>{{ profile.address }}</textarea>
+            </div>
+
+            <h3 class="text-xl font-semibold text-green-700">Upload Documents</h3>
+
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Land Ownership</label>
+
+                <div class="flex items-center justify-between border border-green-300 rounded-lg bg-white p-2">
+                    <input type="file" name="land_document" class="w-full outline-none">
+
+                    {% if profile.land_document %}
+                    <a href="{{ profile.land_document.url }}" target="_blank"
+                        class="ml-4 text-indigo-600 text-sm font-medium hover:underline whitespace-nowrap">
+
+                        {{ profile.land_document.name | cut:"documents/land/" }}
+
+                    </a>
+                    {% endif %}
+                </div>
+
+                {% if not profile.land_document %}
+                <span class="text-gray-500 text-xs">No file uploaded</span>
+                {% endif %}
+
+            </div>
+
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Identity Proof</label>
+                <div class="flex items-center justify-between border border-green-300 rounded-lg bg-white p-2">
+                    <input type="file" name="id_document" class="w-full outline-none">
+
+                    {% if profile.id_document %}
+                    <a href="{{ profile.id_document.url }}" target="_blank"
+                        class="ml-4 text-indigo-600  text-sm font-medium hover:underline whitespace-nowrap">
+
+                        {{ profile.id_document.name | cut:"documents/id/" }}
+
+                    </a>
+                    {% endif %}
+                </div>
+                {% if not profile.id_document %}
+                <span class="text-gray-500 text-xs">No file uploaded</span>
+                {% endif %}
+            </div>
+
+            <button type="submit"
+                class="w-full py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition">
+                Save Profile
+            </button>
+        </form>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#d6f5c9] text-green-800 text-center py-4 mt-10 border-t border-green-300">
+        <p class="text-sm">© 2025 AgroSphere. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+        function previewImage(event) {
+            var output = document.getElementById('profilePreview');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById("removeButton").style.display = "flex"; // show button
+        }
+
+
+        function deletePhoto() {
+            document.getElementById('profilePreview').src = "/static/images/user_default.png";
+            document.getElementById("removeButton").style.display = "none"; // hide button
+
+            fetch("/profile/delete-photo/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            });
+        }
+
+        // Hide remove button if default image on load
+        window.onload = function () {
+            if (document.getElementById("profilePreview").src.includes("user_default.png")) {
+                document.getElementById("removeButton").style.display = "none";
+            }
+        };
+
+    </script>
+
+
+</body>
+
+</html>

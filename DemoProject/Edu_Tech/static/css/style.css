@@ -1,0 +1,27 @@
+.nav-link {
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 3px;
+    background-color: #1F3B73;
+    border-radius: 9999px;
+    transition: width 0.35s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Courses.html page  */
+
+.course-card:hover {
+    transform: translateY(-6px);
+}

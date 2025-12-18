@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks | Edu_Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- NAVBAR -->
+    <nav class="w-full bg-[#E8F1FF] shadow px-10 py-4 flex items-center justify-between sticky top-0 z-50">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+            <div class="bg-white shadow p-1 rounded-xl">
+                <img src="/static/logo.png" alt="Edu_Tech Logo" class="h-12 w-12 object-contain">
+            </div>
+            <span class="text-2xl font-bold text-[#1F3B73] tracking-wide">Edu_Tech</span>
+        </div>
+
+        <!-- Links -->
+        <ul class="hidden md:flex items-center space-x-6 text-[#1F3B73] font-medium">
+            <li><a href="/dashboard/" class="nav-link hover:text-blue-800">Home</a></li>
+            <li><a href="/about/" class="nav-link hover:text-blue-800">About</a></li>
+            <li><a href="/tasks/" class="nav-link active text-blue-800 font-semibold">Tasks</a></li>
+            <li><a href="/courses/" class="nav-link hover:text-blue-800">Courses</a></li>
+            <li><a href="/contact_us/" class="nav-link hover:text-blue-800">Contact Us</a></li>
+        </ul>
+
+        <!-- Right: User Dropdown -->
+        <div class="relative group">
+
+            <button class="bg-white px-5 py-2 rounded-lg text-gray-700 font-medium flex items-center space-x-2 shadow">
+                <span>{{ request.session.user }}</span>
+                <span class="text-gray-500">▾</span>
+            </button>
+
+            <!-- Dropdown -->
+            <div class="absolute right-0 mt-2 -translate-y-1 
+               w-40 bg-white shadow-lg rounded-lg 
+               opacity-0 invisible
+               group-hover:opacity-100 group-hover:visible
+               transition-all duration-200 z-50">
+
+                <a href="/profile/" class="block px-4 py-2 hover:bg-gray-100">
+                    Profile
+                </a>
+
+                <a href="/progress/" class="block px-4 py-2 hover:bg-gray-100">
+                    Progress
+                </a>
+
+                <a href="/logout/" class="block px-4 py-2 hover:bg-gray-100 text-red-600">
+                    Log-out
+                </a>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="max-w-7xl mx-auto px-6 py-16">
+
+        <!-- Header -->
+        <div class="mb-10">
+            <h1 class="text-3xl font-bold text-[#1F3B73] mb-2">Tasks</h1>
+            <p class="text-gray-600">
+                View assigned tasks, track their status, and submit your work.
+            </p>
+        </div>
+
+        <!-- Tasks Table -->
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+
+                    <!-- Head -->
+                    <thead class="bg-[#E8F1FF] text-[#1F3B73]">
+                        <tr>
+                            <th class="px-6 py-4 font-semibold">Task Title</th>
+                            <th class="px-6 py-4 font-semibold">Course</th>
+                            <th class="px-6 py-4 font-semibold">Due Date</th>
+                            <th class="px-6 py-4 font-semibold text-center">Status</th>
+                            <th class="px-6 py-4 font-semibold text-center">Action</th>
+                        </tr>
+                    </thead>
+
+                    <!-- Body -->
+                    <tbody class="divide-y">
+
+                        <!-- Pending -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-medium">HTML Landing Page</td>
+                            <td class="px-6 py-4 text-gray-600">Web Development</td>
+                            <td class="px-6 py-4 text-gray-600">15 Feb 2025</td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-4 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-700">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button
+                                    class="bg-[#1F3B73] text-white px-5 py-2 rounded-lg hover:bg-blue-800 transition">
+                                    Submit
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Approved -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-medium">Python Mini Project</td>
+                            <td class="px-6 py-4 text-gray-600">Python Basics</td>
+                            <td class="px-6 py-4 text-gray-600">05 Feb 2025</td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-4 py-1 rounded-full text-sm font-medium bg-green-100 text-green-700">
+                                    Approved
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="bg-gray-300 text-gray-600 px-5 py-2 rounded-lg cursor-not-allowed">
+                                    Submitted
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Rejected -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-medium">Database Design</td>
+                            <td class="px-6 py-4 text-gray-600">SQL Fundamentals</td>
+                            <td class="px-6 py-4 text-gray-600">28 Jan 2025</td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-4 py-1 rounded-full text-sm font-medium bg-red-100 text-red-700">
+                                    Rejected
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition">
+                                    Resubmit
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Status Legend -->
+        <div class="flex flex-wrap gap-6 mt-8 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-yellow-400 rounded-full"></span> Pending
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-green-500 rounded-full"></span> Approved
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-red-500 rounded-full"></span> Rejected
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-sm bg-[#E8F1FF] text-[#1F3B73] font-medium">
+        © 2025 Edu_Tech. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>
