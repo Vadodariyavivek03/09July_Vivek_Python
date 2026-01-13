@@ -8,6 +8,7 @@ class DeliveryAgentSerializer(serializers.ModelSerializer):
 
 
 class DeliveryOrderSerializer(serializers.ModelSerializer):
+    agent_name = serializers.CharField(source='agent.name', read_only=True)
     class Meta:
         model = DeliveryOrder
         fields = '__all__'
